@@ -12,3 +12,21 @@ db.app_history_reason.aggregate([
     }
   }
 ]).limit(1)
+---------execution from MongoDB Compass-----------------
+{
+  $and: [
+    {
+      "aaData.END_DT": /^9999/
+    },
+    {
+      $or: [
+        {
+          "aaData.CERT_STEP_NM": "Verification"
+        },
+        {
+          "aaData.CERT_STEP_NM": "SP Review"
+        }
+      ]
+    }
+  ]
+}
