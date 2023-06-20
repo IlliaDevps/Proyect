@@ -40,5 +40,5 @@ To pull the project structure from another computer, you can follow these steps:
 
 3. Pull the latest changes:
    - If you want to ensure you have the latest changes from the remote repository, you can run the command `git pull` in the cloned repository directory. This will fetch and merge any changes from the remote repository into your local repository.
-   - git pull origin main
+   - git pull origin master
 After these steps, you should have the project directory structure and files on your computer, synchronized with the remote repository. You can then proceed to work on the project and make any necessary changes or additions.

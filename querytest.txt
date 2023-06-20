@@ -1,0 +1,14 @@
+db.app_history_reason.aggregate([
+  {
+    $match: {
+      "aaData.END_DT": /^9999/,
+      "aaData.CERT_STEP_NM": { $in: ["Verification", "SP Review"] }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      APP_ID: { $arrayElemAt: ["$aaData.APP_ID", 0] }
+    }
+  }
+]).limit(1)
