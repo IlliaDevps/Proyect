@@ -50,9 +50,9 @@ async def appTestingList(client):
     count = 0
     documentsTesting = collection_app_history_reason.find()
     # documents_version = collection_version_basic_info
-    
+
     with open("keys.txt", "w") as file:
-        print("APP_ID__________ObjectID______________Version_________________Cert Step________MDL_STATUS")
+        print("APP_ID________Version_________________Cert Step____MDL_STATUS__________ObjectID____")
 
         for document in documentsTesting:
             key = document["_key"]
@@ -61,14 +61,17 @@ async def appTestingList(client):
             appVersion = aaData[0].get("APP_VER_INFO")
             for item in aaData:
                 if item.get("APP_VER_INFO") == appVersion:
+                    currentDate = item.get("END_DT")
+                    modelStatus = item.get("MDL_STATUS_NM")
+                    certStep = item.get("CERT_STEP_NM")
 
-                    if (re.match(r"9999", item.get("END_DT")) and (item.get("MDL_STATUS_NM") == "Request Test" or item.get("MDL_STATUS_NM") == "Testing" or item.get("MDL_STATUS_NM") == "Tested (Pass)"
-                                                                   or item.get("MDL_STATUS_NM") == "Tested(Fail)")):
+                    if re.match(r"9999", currentDate) and (modelStatus in ["Request Test", "Testing", "Tested(Pass)", "Tested(Fail)"]):
                         # optional conditional re.match(r"9999", item.get("END_DT")) and (item.get("CERT_STEP_NM") == "Verification" or item.get("CERT_STEP_NM") == "SP Review")
-                        print(key, Oid, appVersion, item.get("END_DT"),
-                              item.get("CERT_STEP_NM"), item.get("MDL_STATUS_NM"),  sep=" ")
+                        # optional conditional certStep in ["Verification", "SP Review"]
+                        print(key, appVersion, currentDate,
+                              certStep, modelStatus, Oid, sep=" ")
                         file.write(
-                            f"AppID:{key}, ObjectID:{Oid}, AppVersion:{appVersion} EndDate: \n")
+                            f"AppID:{key}, AppVersion: {appVersion}, CertStep: {certStep} ModelStatus: {modelStatus},ObjectID: {Oid}  \n")
                         count += 1
                         break
                 else:
