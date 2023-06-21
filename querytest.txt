@@ -1,3 +1,4 @@
+{
 "aaData": {
     "$elemMatch": {
       "$and": [
@@ -6,6 +7,30 @@
           "$or": [
             { "CERT_STEP_NM": "Verification" },
             { "CERT_STEP_NM": "SP Review" }
+          ]
+        },
+        {"CERT_STEP_NM": {"$ne":"Release"}}
+      ]
+    }
+  }
+} 
+-------------------------------------------------
+{
+"aaData": {
+    "$elemMatch": {
+      "$or": [
+        {
+          "$and": [
+            {
+              "END_DT": { "$regex": "^9999" },
+              "CERT_STEP_NM": "Verification"           
+            }
+            ],
+            "$and": [
+            {
+              "END_DT": { "$regex": "^9999" },
+              "CERT_STEP_NM": "SP Review"           
+            }
           ]
         }
       ]
