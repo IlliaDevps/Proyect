@@ -11,13 +11,19 @@ uri = f"mongodb://{cluster_url}/?authMechanism={auth_mechanism}&tls=true&tlsCert
 
 app = Flask(__name__)
 
+
 @app.route('/data', methods=['GET'])
 def get_data():
     client = MongoClient(uri)
 
     dbase = client["diamond"]
-    collection_app_history_reason = dbase["app_history_reason"]
+    print(">>>>>>Connected to Diamond DB>>>>>>>>")
+    collection_names = dbase.list_collection_names()
+    print('List of Collection found')
+    for collection_name in collection_names:
+        print(f"- {collection_name}")
 
+    collection_app_history_reason = dbase["app_history_reason"]
     count = 0
     results = []
 
@@ -35,6 +41,8 @@ def get_data():
                 certStep = item.get("CERT_STEP_NM")
 
                 if re.match(r"9999", currentDate) and (modelStatus in ["Request Test", "Testing", "Tested(Pass)", "Tested(Fail)"]):
+                    print(key, lastAppVersion, currentDate,
+                          certStep, modelStatus, Oid, sep=" ")
                     result = {
                         "AppID": key,
                         "AppVersion": lastAppVersion,
@@ -56,6 +64,7 @@ def get_data():
     }
 
     return render_template('index.html', response=response)
+
 
 if __name__ == '__main__':
     app.run()
