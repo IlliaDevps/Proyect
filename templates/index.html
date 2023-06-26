@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>App Testing List</title>
+    <title>App Testing List </title>
     <style>
         table {
             border-collapse: collapse;
             width: 100%;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
-    <h1>App Testing List</h1>
+    <h1>Apps currently on testing status in the collection: verification_tests :{{ app_data_length }}</h1>
     <table>
         <thead>
             <tr>
                 <th>App ID</th>
                 <th>App Version</th>
                 <th>Tester Name</th>
+                <th>Request Date</th>
             </tr>
         </thead>
         <tbody>
@@ -30,9 +35,11 @@
                 <td>{{ app.app_id }}</td>
                 <td>{{ app.app_version }}</td>
                 <td>{{ app.tester_name }}</td>
+                <td>{{ app.request_date }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </body>
+
 </html>

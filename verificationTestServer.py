@@ -35,7 +35,6 @@ def appTestingList():
     query = {'TEST_STAT_NM': 'Testing'}
     sort = [('REQ_DT', -1)]
 
-    count = 0
     documentsTesting = collection_verification_test.find(query).sort(sort)
     # documents_version = collection_version_basic_info
     documentAppIDList = []
@@ -49,22 +48,23 @@ def appTestingList():
             # print(appID)
             appVersion = document["APP_VER_INFO"]
             testername = document["TESTER_NM"]
+            reqData = document["REQ_DT"]
             if appID not in documentAppIDList:
                 documentAppIDList.append(document["APP_ID"])
                 documentAppData.append({
                     "app_id": appID,
                     "app_version": appVersion,
-                    "tester_name": testername
+                    "tester_name": testername,
+                    "request_date": reqData
                 })
                 print(appID, appVersion, testername, sep=" ")
                 file.write(
                     f"AppID  :{appID}, AppVersion  : {appVersion}, Testername  : {testername}  \n")
-                count += 1
-
-    print("Total apps count", count)
+    app_count = len(documentAppData)
+    print("Total apps count", app_count)
     client.close()
-    return render_template('index.html', app_data=documentAppData)
+    return render_template('index.html', app_data=documentAppData, app_data_length=app_count)
 
 
-if __name__ == '__main':
-    app.run()
+if __name__ == '__main__':
+    app.run("0.0.0.0")
