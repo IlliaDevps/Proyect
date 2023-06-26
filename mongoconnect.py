@@ -58,9 +58,9 @@ async def appTestingList(client):
             key = document["_key"]
             Oid = document["_id"]
             aaData = document.get("aaData", [])
-            appVersion = aaData[0].get("APP_VER_INFO")
+            lastAppVersion = aaData[0].get("APP_VER_INFO")
             for item in aaData:
-                if item.get("APP_VER_INFO") == appVersion:
+                if item.get("APP_VER_INFO") == lastAppVersion:
                     currentDate = item.get("END_DT")
                     modelStatus = item.get("MDL_STATUS_NM")
                     certStep = item.get("CERT_STEP_NM")
@@ -68,10 +68,10 @@ async def appTestingList(client):
                     if re.match(r"9999", currentDate) and (modelStatus in ["Request Test", "Testing", "Tested(Pass)", "Tested(Fail)"]):
                         # optional conditional re.match(r"9999", item.get("END_DT")) and (item.get("CERT_STEP_NM") == "Verification" or item.get("CERT_STEP_NM") == "SP Review")
                         # optional conditional certStep in ["Verification", "SP Review"]
-                        print(key, appVersion, currentDate,
+                        print(key, lastAppVersion, currentDate,
                               certStep, modelStatus, Oid, sep=" ")
                         file.write(
-                            f"AppID:{key}, AppVersion: {appVersion}, CertStep: {certStep} ModelStatus: {modelStatus},ObjectID: {Oid}  \n")
+                            f"AppID:{key}, AppVersion: {lastAppVersion}, CertStep: {certStep} ModelStatus: {modelStatus},ObjectID: {Oid}  \n")
                         count += 1
                         break
                 else:
