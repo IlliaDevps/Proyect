@@ -1,4 +1,4 @@
-import asyncio
+from flask import Flask, render_template
 from pymongo import MongoClient
 
 cluster_url = "mongodb.wawsrvdev108:27017"
@@ -8,14 +8,17 @@ auth_mechanism = "MONGODB-X509"
 
 uri = f"mongodb://{cluster_url}/?authMechanism={auth_mechanism}&tls=true&tlsCertificateKeyFile={client_pem_file}&tlsCAFile={ca_file}"
 
-# Create a new MongoClient
-print("--------------------------Creating a new MongoClient------------------------------------")
-client = MongoClient(uri)
 
 # Function to connect to the server and gather data
+app = Flask(__name__)
 
 
-async def appTestingList(client):
+@app.route('/')
+def appTestingList():
+    # Create a new MongoClient
+    print("--------------------------Creating a new MongoClient------------------------------------")
+    client = MongoClient(uri)
+
     databases_list = client.list_database_names()
     print("Databases found:")
     for db in databases_list:
@@ -36,7 +39,7 @@ async def appTestingList(client):
     documentsTesting = collection_verification_test.find(query).sort(sort)
     # documents_version = collection_version_basic_info
     documentAppIDList = []
-    documentUniqueID = []
+    documentAppData = []
     with open("keys.txt", "w") as file:
         print("APP_ID________Version____TesterName")
 
@@ -48,7 +51,11 @@ async def appTestingList(client):
             testername = document["TESTER_NM"]
             if appID not in documentAppIDList:
                 documentAppIDList.append(document["APP_ID"])
-                documentUniqueID.append(document)
+                documentAppData.append({
+                    "app_id": appID,
+                    "app_version": appVersion,
+                    "tester_name": testername
+                })
                 print(appID, appVersion, testername, sep=" ")
                 file.write(
                     f"AppID  :{appID}, AppVersion  : {appVersion}, Testername  : {testername}  \n")
@@ -56,9 +63,8 @@ async def appTestingList(client):
 
     print("Total apps count", count)
     client.close()
+    return render_template('index.html', app_data=documentAppData)
 
 
-async def main():
-    await appTestingList(client)
-
-asyncio.run(main())
+if __name__ == '__main':
+    app.run()
