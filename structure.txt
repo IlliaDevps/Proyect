@@ -1,5 +1,44 @@
 {
   "_id": {
+    "$oid": "6489c533a3420a9cb01c477c"
+  },
+  "APP_ID": "3201908018988",
+  "APP_VER_INFO": "1.16.2",
+  "APP_VER_SEQ_NO": 15,
+  "APP_VER_UP_RSN_CD": "AP.APPUP.020",
+  "APP_VER_UP_RSN_NM": "VerUp by CP",
+  "APP_MDL_VER_UP_RSN_CD": "AP.MDLUP.NEW",
+  "APP_MDL_VER_UP_RSN_NM": "New",
+  "SDK_TYP_CD": "AP.SDK.TIZEN",
+  "SDK_TYP_NM": "Tizen",
+  "GEO_IP_ADDR_BLCK_RSTRT_YN": "Y",
+  "MDL_GRP_ID": "23TV_BASIC1",
+  "CHPST_NM": "23_KANTSU2E(23TV_BASIC1)",
+  "CERT_STEP_CD": "AP.CS.VF",
+  "TEST_ID": "2324046679",
+  "APP_TEST_TYP_CD": "AP.TST_TP.FULL_TST",
+  "APP_TEST_TYP_NM": "Full",
+  "REQ_DT": "2023-06-14 13:37",
+  "MAX_TEST_REQ_DT": {
+    "$numberLong": "1686749822000"
+  },
+  "CNTR_NM": "SRPOL(TS)",
+  "CNTR_ID": "TS_SRPOL",
+  "TESTER_NM": "Robert Gasz",
+  "TEST_STAT_NM": "Testing",
+  "RTRY_CNT": "1",
+  "VRFCTN_CNTR_STAT_CD": "CF.VS.2040",
+  "STEP_VRFCTN_CNTR_STAT_CD": "AP.CS.VF.2040",
+  "CLOUD_TV_APP_REG_CD": "AP.CAST.CAST",
+  "_hash": "d8a5ec2ce78d882c28feb1f24d9516fa",
+  "_update": "2023.06.25 12:15:01"
+}
+
+/---------------------------------------------------------------------------
+
+
+{
+  "_id": {
     "$oid": "60d184d0a42212becb1d29bc"
   },
   "result": "success",
