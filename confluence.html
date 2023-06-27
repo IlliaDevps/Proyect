@@ -1,0 +1,21 @@
+<script>
+  fetch('http://106.120.70.108/api')
+    .then(response => response.json())
+    .then(data => {
+      // Process the data and update the HTML content
+      const tableElement = document.getElementById('backend-table');
+      let tableHTML = '<table><thead><tr><th>Element</th></tr></thead><tbody>';
+      
+      data.forEach(element => {
+        tableHTML += `<tr><td>${element}</td></tr>`;
+      });
+      
+      tableHTML += '</tbody></table>';
+      tableElement.innerHTML = tableHTML;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+</script>
+
+<div id="backend-table">Loading...</div>
