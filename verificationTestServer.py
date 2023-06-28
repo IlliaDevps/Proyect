@@ -67,4 +67,4 @@ def appTestingList():
 
 
 if __name__ == '__main__':
-    app.run("0.0.0.0")
+    app.run("0.0.0.0") #, ssl_context=('cert.pem', 'key.pem')
