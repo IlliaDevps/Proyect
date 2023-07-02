@@ -1,3 +1,5 @@
+import os
+from dotenv import loaddotenv
 from flask import Flask, render_template
 from pymongo import MongoClient
 
