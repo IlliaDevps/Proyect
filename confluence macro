@@ -27,3 +27,13 @@
 
 
 curl -v https://kb.sprc.samsung.pl/rest/api/content/560868319 --user i.duverkher:4i8c66j5q2o344ercc7kmlrq0u9mofq
+
+import requests
+
+url = "https://kb.sprc.samsung.pl/rest/api/content/560868319"
+username = "i.duverkher"
+password = "4i8c66j5q2o344ercc7kmlrq0u9mofq"
+
+response = requests.get(url, auth=(username, password))
+
+print(response.text)
