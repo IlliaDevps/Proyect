@@ -1,21 +1,26 @@
 ## @param backendUrl:title=Backend URL|type=string|required=true
 
 (function() {
-  var backendUrl = "YOUR_BACKEND_URL_HERE";
+  var backendUrl = AJS.params.backendUrl;
 
   // Disable SSL verification and security certificate checks
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-  // Create a new script element
-  var script = document.createElement('script');
-  script.src = backendUrl;
+  // Make a GET request to the backend server
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", backendUrl, true);
 
-  // Attach a callback function to handle the response
-  script.onload = function() {
-    // Process the response as needed
-    console.log('Response received');
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        var response = xhr.responseText;
+        // Process the response as needed
+        console.log(response);
+      } else {
+        console.error("Failed to make request. Status code: " + xhr.status);
+      }
+    }
   };
 
-  // Append the script element to the document
-  document.head.appendChild(script);
+  xhr.send();
 })();
