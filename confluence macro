@@ -1,3 +1,5 @@
+{"Alicja Bielejec": 1, "Daniel Loboda": 1, "Filip Maciejewski": 1, "Izabela Seroczynska": 2, "Karolina Romanow": 1, "Lukasz Kopczynski": 1, "Mariusz Dynarzewski": 1, "Michal Porzuc": 2, "Rafal Koc": 3, "Sebastian Stokowski": 3}
+
 ## @param backendUrl:title=Backend URL|type=string|required=true
 
 (function() {
