@@ -1,0 +1,21 @@
+## @param backendUrl:title=Backend URL|type=string|required=true
+
+(function() {
+  var backendUrl = "YOUR_BACKEND_URL_HERE";
+
+  // Disable SSL verification and security certificate checks
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+  // Create a new script element
+  var script = document.createElement('script');
+  script.src = backendUrl;
+
+  // Attach a callback function to handle the response
+  script.onload = function() {
+    // Process the response as needed
+    console.log('Response received');
+  };
+
+  // Append the script element to the document
+  document.head.appendChild(script);
+})();
