@@ -24,3 +24,6 @@
 
   xhr.send();
 })();
+
+
+curl -v https://kb.sprc.samsung.pl/rest/api/content/560868319 --user i.duverkher:4i8c66j5q2o344ercc7kmlrq0u9mofq
