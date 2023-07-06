@@ -1,5 +1,4 @@
-import os
-from dotenv import loaddotenv
+import ssl
 from flask import Flask, render_template
 from pymongo import MongoClient
 
@@ -79,5 +78,10 @@ def appTestingList():
     return render_template('index.html', app_data=documentAppData, app_data_length=app_count, tester_app=key_counts)
 
 
+# context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+# context.load_cert_chain('ssl/IlliaDuverkherNatiahin-2023-07-06-151436.cer',
+#                       'ssl/IlliaDuverkherNatiahin-2023-07-06-151436.pkey')
+
 if __name__ == '__main__':
-    app.run("0.0.0.0")  # , ssl_context=('cert.pem', 'key.pem')
+    app.run("0.0.0.0", ssl_context=('ssl/IlliaDuverkherNatiahin-2023-07-06-151436.cer',
+            'ssl/IlliaDuverkherNatiahin-2023-07-06-151436.pkey'))  #
