@@ -1,6 +1,6 @@
 
 (function() {
-  var backendUrl = "";
+  var backendUrl = "http://106.120.70.108:5000";
 
   // Include the Promise polyfill
   if (typeof window.Promise === 'undefined') {
