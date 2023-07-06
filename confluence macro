@@ -133,3 +133,39 @@ print(response.text)
   // Send the request
   xhr.send();
 })();
+------------------------------------------------------------
+(function() {
+  var backendUrl = "YOUR_BACKEND_URL_HERE";
+
+  // Create a new AbortController
+  var controller = new AbortController();
+  var signal = controller.signal;
+
+  // Ignore SSL certificate errors
+  var httpsAgent = new https.Agent({
+    rejectUnauthorized: false
+  });
+
+  // Make a GET request to the backend server
+  fetch(backendUrl, {
+    method: 'GET',
+    signal: signal,
+    agent: httpsAgent
+  })
+    .then(function(response) {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error('Request failed. Status: ' + response.status);
+      }
+    })
+    .then(function(data) {
+      console.log(data);
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+    });
+
+  // Abort the request if needed
+  // controller.abort();
+})();
