@@ -55,7 +55,7 @@ def get_and_set(page_id):
         new_json_data['key'] = json_data['key']
 
     new_json_data['body'] = {'storage': {
-        'value': '<p>This is the updated text for the new page created with confluence Rest-API</p>' +
+        'value': '<p>the info you see here was created with Python using confluence Rest-API</p>' +
         '<p><table><tr><th>head1</th><th>head2</th></tr><tr><td>value1</td><td>value2</td></tr><tr><td>value3</td><td>value4</td></tr></table></p>', 'representation': 'storage'}}
     print(set_page_json(page_id, new_json_data))
 
