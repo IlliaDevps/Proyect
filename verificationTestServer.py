@@ -39,6 +39,7 @@ def appTestingList():
     # documents_version = collection_version_basic_info
     documentAppIDList = []
     documentAppData = []
+
     with open("keys.txt", "w") as file:
         print("APP_ID________Version____TesterName")
 
@@ -49,6 +50,7 @@ def appTestingList():
             appVersion = document["APP_VER_INFO"]
             testername = document["TESTER_NM"]
             reqData = document["REQ_DT"]
+
             if appID not in documentAppIDList:
                 documentAppIDList.append(document["APP_ID"])
                 documentAppData.append({
@@ -57,14 +59,23 @@ def appTestingList():
                     "tester_name": testername,
                     "request_date": reqData
                 })
-                print(appID, appVersion, testername, sep=" ")
+             # print(appID, appVersion, testername, sep=" ")
                 file.write(
                     f"AppID  :{appID}, AppVersion  : {appVersion}, Testername  : {testername}  \n")
     app_count = len(documentAppData)
     print("Total apps count", app_count)
+
+    key_counts = {}
+    for element in documentAppData:
+        key = element['tester_name']
+        if key in key_counts:
+            key_counts[key] += 1
+        else:
+            key_counts[key] = 1
+
     client.close()
-    return render_template('index.html', app_data=documentAppData, app_data_length=app_count)
+    return render_template('index.html', app_data=documentAppData, app_data_length=app_count, tester_app=key_counts)
 
 
 if __name__ == '__main__':
-    app.run("0.0.0.0") #, ssl_context=('cert.pem', 'key.pem')
+    app.run("0.0.0.0")  # , ssl_context=('cert.pem', 'key.pem')

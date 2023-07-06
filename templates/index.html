@@ -5,9 +5,10 @@
     <title>App Testing List </title>
     <style>
         body {
+
             font-family: Arial, sans-serif;
         }
-        
+
         h1 {
             text-align: center;
         }
@@ -17,21 +18,22 @@
             border-collapse: collapse;
             margin-top: 20px;
         }
-        
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
-        
+
         th {
             background-color: #f2f2f2;
         }
-        
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         tr:hover {
             background-color: #e5e5e5;
         }
@@ -39,6 +41,43 @@
 </head>
 
 <body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        const ctx = document.getElementById('myChart');
+        var app_data = JSON.parse('{{ tester_app | tojson | safe }}');
+        console.log(app_data);
+        var key = Object.keys(app_data)
+        var values = key.map(function (key) {
+            return app_data[key]
+        });
+        //for data in app_data
+
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: key,
+                datasets: [{
+                    label: 'ChartJS: Apps on testing status from the collection verification_tests {{ app_data_length }}',
+                    data: values,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
     <h1>Apps currently on testing status in the collection: verification_tests :{{ app_data_length }}</h1>
     <table>
         <thead>
@@ -60,6 +99,7 @@
             {% endfor %}
         </tbody>
     </table>
+
 </body>
 
 </html>
