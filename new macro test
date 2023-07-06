@@ -16,3 +16,28 @@ fetch(url, {
   .catch(error => {
     console.error(error);
   });
+
+-------------------------------------------------
+// Create a cURL resource
+$curl = curl_init();
+
+// Set the URL
+$url = 'https://example.com/api';
+
+// Disable certificate checks
+curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+// Set other options and parameters as needed
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+// Execute the request
+$response = curl_exec($curl);
+
+// Get the response status
+$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+echo "Response Status: " . $status . "<br>";
+
+// Close the cURL resource
+curl_close($curl);
