@@ -83,5 +83,6 @@ def appTestingList():
 #                       'ssl/IlliaDuverkherNatiahin-2023-07-06-151436.pkey')
 
 if __name__ == '__main__':
-    app.run("0.0.0.0", ssl_context=('ssl/IlliaDuverkherNatiahin-2023-07-06-151436.cer',
-            'ssl/IlliaDuverkherNatiahin-2023-07-06-151436.pkey'))  #
+    # , ssl_context=('ssl/IlliaDuverkherNatiahin-2023-07-06-151436.cer',
+    app.run("0.0.0.0")
+    #  'ssl/IlliaDuverkherNatiahin-2023-07-06-151436.pkey')
