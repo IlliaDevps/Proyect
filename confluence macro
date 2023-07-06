@@ -99,3 +99,37 @@ print(response.text)
   // Abort the request if needed
   // controller.abort();
 })();
+
+--------------------------------------------------------------------
+## @param backendUrl:title=Backend URL|type=string|required=true
+
+(function() {
+  var backendUrl = AJS.params.backendUrl;
+
+  // Create a new XMLHttpRequest object
+  var xhr = new XMLHttpRequest();
+
+  // Disable SSL verification by overriding the onreadystatechange method
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === xhr.OPENED) {
+      xhr._onHttpRequestOpened = xhr._onHttpRequestOpened || xhr._onreadystatechange;
+      xhr._onreadystatechange = function() {
+        if (xhr.readyState === xhr.DONE) {
+          if (xhr.status === 0 || (xhr.status >= 200 && xhr.status < 400)) {
+            var response = xhr.responseText;
+            // Process the response as needed
+            console.log(response);
+          } else {
+            console.error("Failed to make request. Status code: " + xhr.status);
+          }
+        }
+      };
+    }
+  };
+
+  // Open a GET request to the backend server
+  xhr.open("GET", backendUrl, true);
+
+  // Send the request
+  xhr.send();
+})();
