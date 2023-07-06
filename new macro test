@@ -1,10 +1,9 @@
-fetch('https://example.com/api', {
+fetch(url, {
   method: 'GET',
   headers: {
-    'Accept': 'application/json'
-    'Authorization': '4i8c66j5q2o344ercc7kmlrq0u9mofq'
+    'Accept': 'application/json',
+    'Authorization': `Basic ${btoa('i.duverkher:4i8c66j5q2o344ercc7kmlrq0u9mofq')}`
   },
-  agent: new window._virtualConsole.VirtualConsole().sendTo(console),
   rejectUnauthorized: false
 })
   .then(response => {
@@ -15,5 +14,5 @@ fetch('https://example.com/api', {
     console.log(data);
   })
   .catch(error => {
-    console.error('Error:', error);
+    console.error(error);
   });
