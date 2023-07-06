@@ -201,3 +201,35 @@ print(response.text)
       console.error('Error:', error);
     });
 })();
+--------------------------------------------
+(function() {
+  var backendUrl = "YOUR_BACKEND_URL_HERE";
+
+  // Make a GET request to the backend server
+  fetch(backendUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    mode: 'cors',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    agent: new (window.ES6Promise || ES6Promise).Agent({
+      rejectUnauthorized: false
+    })
+  })
+    .then(function(response) {
+      if (response.ok) {
+        return response.text();
+      } else {
+        throw new Error('Request failed. Status: ' + response.status);
+      }
+    })
+    .then(function(data) {
+      console.log(data);
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+    });
+})();
