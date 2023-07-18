@@ -37,6 +37,13 @@
         tr:hover {
             background-color: #e5e5e5;
         }
+
+        /*canvas#myChart {
+            width: 40% !important;
+            height: 40% !important;
+            margin: 0 auto !important;
+
+        }*/
     </style>
 </head>
 
@@ -50,11 +57,11 @@
     <script>
 
         const ctx = document.getElementById('myChart');
-        var app_data = JSON.parse('{{ tester_app | tojson | safe }}');
-        console.log(app_data);
-        var key = Object.keys(app_data)
+        var tester_data = JSON.parse('{{ tester_app | tojson | safe }}');
+        // console.log(app_data);
+        var key = Object.keys(tester_data)
         var values = key.map(function (key) {
-            return app_data[key]
+            return tester_data[key]
         });
         //for data in app_data
 
@@ -66,6 +73,18 @@
                 datasets: [{
                     label: 'ChartJS: Apps on testing status from the collection verification_tests {{ app_data_length }}',
                     data: values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(101, 103, 207, 0.2)',
+                        'rgba(21, 203, 47, 0.2)',
+                        'rgba(177, 33, 207, 0.2)'
+                    ],
                     borderWidth: 1
                 }]
             },

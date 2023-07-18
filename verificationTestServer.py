@@ -1,6 +1,8 @@
 import ssl
 from flask import Flask, render_template
 from pymongo import MongoClient
+import urllib3
+from werkzeug.serving import make_ssl_devcert
 
 cluster_url = "mongodb.wawsrvdev108:27017"
 client_pem_file = "C:\\Users\\i.duverkher\\Desktop\\important\\i.duverkher\\i.duverkher_mongo.pem"
@@ -12,6 +14,7 @@ uri = f"mongodb://{cluster_url}/?authMechanism={auth_mechanism}&tls=true&tlsCert
 
 # Function to connect to the server and gather data
 app = Flask(__name__)
+urllib3.disable_warnings()
 
 
 @app.route('/')
@@ -83,6 +86,8 @@ def appTestingList():
 #                       'ssl/IlliaDuverkherNatiahin-2023-07-06-151436.pkey')
 
 if __name__ == '__main__':
+    # , ssl_context='adhoc'
     # , ssl_context=('ssl/IlliaDuverkherNatiahin-2023-07-06-151436.cer',
-    app.run("0.0.0.0")
+    # make_ssl_devcert('cert', host='0.0.0.0')
+    app.run("0.0.0.0")  # , ssl_context='adhoc'
     #  'ssl/IlliaDuverkherNatiahin-2023-07-06-151436.pkey')
